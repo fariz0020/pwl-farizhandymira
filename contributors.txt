@@ -1,2 +1,6 @@
 Fariz 
+<<<<<<< HEAD
 me
+=======
+aku sudah ngantuk riz, tak masuk ke otak lagi kwwkk
+>>>>>>> 4fe74c4de27fd2f02490b3e4bd78a829ef6b63c6
