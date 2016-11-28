@@ -10,6 +10,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 .mySlides {display:none}
 </style>
 <body class="w3-content w3-border-left w3-border-right">
+<?php 
+	include 'connect.php'; 
+	if(isset($_GET['idlisting'])){
+		$idlisting =  $_GET['idlisting'];
+	$query = mysql_query("select * from listing where idlisting='$idlisting'")or die(mysql_error());
+	}
+?>
+
 <ul class="w3-navbar w3-white w3-large">
   <li><a href="#" class="w3-red"><i class="fa fa-home w3-margin-right"></i>Logo</a></li>
   <li><a href="#rooms">Home</a></li>
@@ -48,6 +56,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 
 
 <!-- !PAGE CONTENT! -->
+<?php
+	while($data = mysql_fetch_array($query)){
+?>
 <div class="w3-main w3-white w3-col m8 l9" >
 
   <!-- Push down content on small screens -->
@@ -55,7 +66,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 
   <!-- Slideshow Header -->
   <div class="w3-container" id="apartment">
-    <h2 class="w3-text-green">The Apartment</h2>
+    <h2 class="w3-text-green"><?php echo $data['judullisting'] ?></h2>
     <div class="w3-display-container mySlides">
     <img src="assets/house-1.jpg" style="width:100%;margin-bottom:-6px">
       <div class="w3-display-bottomleft w3-container w3-black">
@@ -97,18 +108,18 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
   </div>
 
   <div class="w3-container">
-    <h3 class="w3-right w3-text-green"><strong>Rp. 920.000.000</strong></h3>
+    <h3 class="w3-right w3-text-green"><strong>Rp. <?php echo $data['hargalisting'] ?></strong></h3>
     <h4><strong>The space</strong></h4>
     <div class="w3-row w3-large">
       <div class="w3-col s6">
-        <p><i class="fa fa-fw fa-external-link"></i> Land Area: 4 m2</p>
-        <p><i class="fa fa-fw fa-bed"></i> Bedrooms: 1</p>
-        <p><i class="fa fa-fw fa-bath"></i> Bathrooms: 2</p>
+        <p><i class="fa fa-fw fa-external-link"></i> Land Area: <?php echo $data['larea'] ?> m2</p>
+        <p><i class="fa fa-fw fa-bed"></i> Bedrooms: <?php echo $data['bedroom'] ?></p>
+        <p><i class="fa fa-fw fa-bath"></i> Bathrooms: <?php echo $data['restroom'] ?></p>
       </div>
       <div class="w3-col s6">
-        <p><i class="fa fa-fw fa-external-link-square"></i> Building Area: 4 m2</p>
+        <p><i class="fa fa-fw fa-external-link-square"></i> Building Area: <?php echo $data['barea'] ?> m2</p>
         <p><i class="fa fa-fw fa-building"></i> Building: House</p>
-        <p><i class="fa fa-fw fa-bolt"></i> Electricity: 800 MHz</p>
+        <p><i class="fa fa-fw fa-bolt"></i> Electricity: <?php echo $data['elec'] ?> MHz</p>
       </div>
     </div>
     <hr>
@@ -159,6 +170,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 
   <footer class="w3-container w3-padding-16" style="margin-top:32px">Powered by <a href="http://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></footer>
 
+<?php
+	}
+?>
+  
 <!-- End page content -->
 </div>
 
